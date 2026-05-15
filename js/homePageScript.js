@@ -4383,9 +4383,9 @@ class MultiFaceDisplay {
             case 'headline':
                 fontSize = Math.min(width, height) * 1; // Even bigger - almost completely fill panel
                 fontFamily = this.fontsLoaded ? this.fontConfig.headline.name : 'Arial Black, Arial, sans-serif';
-                textColor = '#222'; // characters color
-                strokeColor = '#000000';
-                strokeWidth = 0; // Thicker stroke for better visibility over video
+                textColor = '#ddddd1';  // characters color
+                strokeColor = '#222';
+                strokeWidth = 7; // Thicker stroke for better visibility over video
                 break;
             case 'highlight':
                 fontSize = Math.min(width, height) * 0.85; // Even larger for highlights
@@ -4418,11 +4418,13 @@ class MultiFaceDisplay {
         const y = height / 1.8;
 
         // Draw character with thick stroke for visibility over video
-        // if (strokeWidth > 0 && strokeColor) {
-        //     ctx.strokeStyle = strokeColor;
-        //     ctx.lineWidth = strokeWidth;
-        //     ctx.strokeText(character, x, y);
-        // }
+        if (strokeWidth > 0 && strokeColor) {
+            ctx.strokeStyle = strokeColor;
+            ctx.lineWidth = strokeWidth;
+            ctx.lineJoin = 'round';
+            ctx.miterLimit = 2;
+            ctx.strokeText(character, x, y);
+        }
 
         ctx.fillStyle = textColor;
         ctx.fillText(character, x, y);
