@@ -6,7 +6,7 @@ Academy of Arts and Design.
 
 ## Live site
 
-https://omri-bergman.github.io
+https://omri-bergman.github.io/Fireflies/
 
 ## How it works
 
