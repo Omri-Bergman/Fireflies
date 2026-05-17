@@ -49,26 +49,29 @@ class MultiFaceDisplay {
         this.primitiveObjects = [];
 
         // Font configuration
+        // Paths are relative to index.html (the document this script runs in),
+        // so they must NOT start with "../" or they will resolve outside the
+        // project root when served from a sub-path like /Fireflies/.
         this.fontConfig = {
             title: {
                 name: 'TheBasics-Bold',
-                path: '../css/fonts/TheBasics-Bold.otf',
+                path: 'css/fonts/TheBasics-Bold.otf',
                 boldName: 'TheBasics-DisplayBlack',
-                boldPath: '../css/fonts/TheBasics-DisplayBlack.woff2'
+                boldPath: 'css/fonts/TheBasics-DisplayBlack.woff2'
             },
             author: {
                 name: 'NarkissYair-Regular-TRIAL',
-                path: '../css/fonts/NarkissYair-Regular-TRIAL.otf',
+                path: 'css/fonts/NarkissYair-Regular-TRIAL.otf',
                 boldName: 'NarkissYair-Bold-TRIAL',
-                boldPath: '../css/fonts/NarkissYair-Bold-TRIAL.otf'
+                boldPath: 'css/fonts/NarkissYair-Bold-TRIAL.otf'
             },
             headline: {
                 name: 'GretaText-Bold',
-                path: '../css/fonts/GretaText-Bold.woff2'
+                path: 'css/fonts/GretaText-Bold.woff2'
             },
             scentence: {
                 name: 'GretaText-Light',
-                path: '../css/fonts/GretaText-Light.otf'
+                path: 'css/fonts/GretaText-Light.otf'
             }
         };
 

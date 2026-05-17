@@ -1,4 +1,19 @@
 // navbar.js - Grid-based navbar system that matches homePageScript.js grid
+
+// Capture the URL this script was loaded from. We use this to derive the
+// project base URL so the site works whether served at the domain root
+// (e.g. https://user.github.io/) or at a sub-path (e.g.
+// https://user.github.io/Fireflies/). document.currentScript is only
+// available during initial script execution, so we grab it at top level.
+const NAVBAR_SCRIPT_URL = (document.currentScript && document.currentScript.src) || '';
+
+function getProjectBaseUrl() {
+    // navbar.js is always loaded from "<base>/js/navbar.js". Strip that suffix
+    // (and any query/hash) to get the project base URL ending with "/".
+    if (!NAVBAR_SCRIPT_URL) return '/';
+    return NAVBAR_SCRIPT_URL.replace(/\/js\/navbar\.js(?:[?#].*)?$/, '/');
+}
+
 class UniversalNavbar {
     constructor() {
         this.navData = [
@@ -652,43 +667,17 @@ class UniversalNavbar {
     }
 
     getHomepageUrl() {
-        const currentPath = window.location.pathname;
-        const directoryPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
-        const pathSegments = directoryPath.split('/').filter(segment => segment.length > 0);
-        
-        if (pathSegments.length === 0) {
-            return './';
-        } else {
-            return '../'.repeat(pathSegments.length);
-        }
+        // Project base URL is derived from navbar.js's own location, so this
+        // works at the domain root or under any sub-path (e.g. /Fireflies/).
+        return getProjectBaseUrl();
     }
 
     getStaticGridUrl() {
-        const currentPath = window.location.pathname;
-        const directoryPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
-        const pathSegments = directoryPath.split('/').filter(segment => segment.length > 0);
-        
-        if (pathSegments.length === 0) {
-            // We're in the root directory
-            return './articles/screen/static-grid.html';
-        } else {
-            // We're in a subdirectory, need to go back to root
-            return '../'.repeat(pathSegments.length) + 'articles/screen/static-grid.html';
-        }
+        return getProjectBaseUrl() + 'articles/screen/static-grid.html';
     }
-    
+
     getEditorsUrl() {
-        const currentPath = window.location.pathname;
-        const directoryPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
-        const pathSegments = directoryPath.split('/').filter(segment => segment.length > 0);
-        
-        if (pathSegments.length === 0) {
-            // We're in the root directory
-            return './articles/editors/editors.html';
-        } else {
-            // We're in a subdirectory, need to go back to root
-            return '../'.repeat(pathSegments.length) + 'articles/editors/editors.html';
-        }
+        return getProjectBaseUrl() + 'articles/editors/editors.html';
     }
     
     
